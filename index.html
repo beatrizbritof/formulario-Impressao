@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css">
+    <title>Formulário para impressão</title>
+  </head>
+  <body>
+    <main>
+        <header id="header">
+          <a href=""><img id="logo" src="imagens/imgLogo.png" alt=""></a>
+          <nav id="nav">
+            <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">Menu
+              <span id="hamburger"></span>
+            </button>
+            <ul id="menu" role="menu">
+              <li><a href="sobre.html">Sobre</a></li>
+              <li><a href="index.html">Formulário</a></li>
+            </ul>
+          </nav>
+        </header>
+      <div id="teste">
+        <form action="">
+          <label for="nome">Nome:</label>
+          <br>
+          <input id="nome" />
+          <br />
+          <label for="sobrenome">Sobrenome:</label>
+          <br>
+          <input id="sobrenome" />
+          <br />
+          <label for="nascimento">Nascimento:</label>
+          <br>
+          <input id="nascimento" />
+          <br />
+          <label for="profissao">Profissão:</label>
+          <br>
+          <input id="profissao" />
+          <br />
+          <label for="cpf">CPF:</label>
+          <br>
+          <input id="cpf" />
+          <br />
+          <label for="cep">CEP:</label>
+          <br>
+          <input id="cep" />
+          <br />
+          <label for="senha">Senha:</label>
+          <br>
+          <input type="password" id="senha" required/>
+          <br />
+          <label for="confirmacao">Confirmação:</label>
+          <br>
+          <input type="password" id="confirmacao" required/>
+        </div>
+      </form>
+
+        <div id="divButton">
+          <button id="botao" onclick="guardaForm()">Envia</button>
+        </div>
+
+        <div class="teste1">
+      <div id="nomePrint"></div>
+      <div id="sobrenomePrint"></div>
+      <div id="nascimentoPrint"></div>
+      <div id="profissaoPrint"></div>
+      <div id="cpfPrint"></div>
+      <div id="cepPrint"></div>
+      <div id="senhaPrint"></div>
+      <div id="confirmacaoPrint"></div>
+    </div>
+      <script src="javascript/script.js"></script>
+
+   
+    </main>
+  </body>
+</html>
