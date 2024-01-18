@@ -1,242 +1,265 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Open+Sans:wght@300;400;500;600&display=swap');
 
 * {
-  margin: 0;
-  border: 0;
-  padding: 0;
-  background-color: #f6f6ee;
-  font-family: "Poppins", sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
-/* início do HEADER -------------------------- */
-a {
-  color: rgb(161, 0, 0);
-  text-decoration: none;
-  font-family: sans-serif;
-}
-
-a:hover {
-  background: rgba(255, 155, 155, 0.05);
-}
-
-#logo {
-  height: 200px;
-  padding-top: 90px;
-  display: flex;
-}
-
-#header {
-  box-sizing: border-box;
-  height: 70px;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-#menu {
-  padding-top: 45px;
-  display: flex;
-  list-style: none;
-  gap: 0.5rem;
-}
-
-#menu li a {
-  margin-right: 50px;
-}
-
-#menu a {
-  display: block;
-  padding: 0.5rem;
-}
-
-#btn-mobile {
-  display: none;
-}
-
-@media (max-width: 600px) {
-  #menu {
-    display: block;
-    position: absolute;
+body {
     width: 100%;
-    top: 105px;
-    right: 0px;
-    background: #f6f6ee;
-    transition: 0.6s;
-    z-index: 1000;
-    height: 0px;
-    visibility: hidden;
-    overflow-y: hidden;
-    align-items: center;
-    justify-content: center;
-  }
-  #nav.active #menu {
-    height: calc(100vh - 70px);
-    visibility: visible;
-    overflow-y: auto;
-  }
-  #menu a {
-    padding: 1rem 0;
-    margin: 0 1rem;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
-  }
-  #btn-mobile {
+    height: 100vh;
     display: flex;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+    justify-content: center;
+    align-items: center;
+    background: #0c0ce94d;
+}
+
+.container {
+    width: 80%;
+    height: 97vh;
+    display: flex;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.212);
+}
+
+.form-image {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dbedffc0;
+    padding: 1rem;
+}
+
+.form-image img {
+    width: 31rem;
+}
+
+.form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 3rem;
+}
+
+.form-header {
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-button {
+    display: flex;
+    align-items: center;
+}
+
+.login-button button {
     border: none;
-    background: none;
+    background-color: #6c63ff;
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
     cursor: pointer;
-    gap: 0.5rem;
-  }
-  #hamburger {
-    border-top: 2px solid;
-    width: 20px;
-  }
-  #hamburger::after,
-  #hamburger::before {
-    content: "";
+}
+
+.login-button button:hover {
+    background-color: #6b63fff1;
+}
+
+.login-button button a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #fff;
+}
+
+.form-header h1::after {
+    content: '';
     display: block;
-    width: 20px;
-    height: 2px;
-    background: currentColor;
-    margin-top: 5px;
-    transition: 0.3s;
-    position: relative;
-  }
-  #nav.active #hamburger {
-    border-top-color: transparent;
-  }
-  #nav.active #hamburger::before {
-    transform: rotate(135deg);
-  }
-  #nav.active #hamburger::after {
-    transform: rotate(-135deg);
-    top: -7px;
-  }
+    width: 5rem;
+    height: 0.3rem;
+    background-color: #6c63ff;
+    margin: 0 auto;
+    position: absolute;
+    border-radius: 10px;
 }
 
-/* -------------fim do HEADER ----------------- */
-
-#teste {
-  columns: 2;
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1rem 0;
 }
 
-form {
-  width: 35%;
-  /* border: 1px solid black; */
-  box-shadow: -11px 17px 28px 0px #d1001c;
-  box-sizing: border-box;
-  padding: 20px;
-  display: inline-block;
-  margin-left: 85%;
-  margin-top: 17%;
+.input-box {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.1rem;
 }
 
-input {
-  width: 100%;
-  outline: none;
-  border: none;
-  background-color: #fadcd7;
+.input-box input {
+    margin: 0.6rem 0;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px #0000001c;
+    font-size: 0.8rem;
 }
 
-#divButton {
-  width: 100%;
-  height: 100%;
-  margin-top: 50px;
-  display: flex;
-  position: relative;
+.input-box input:hover {
+    background-color: #eeeeee75;
 }
 
-#botao {
-  width: 20%;
-  height: 40px;
-  background-color: #fadcd7;
-  margin-left: 41%;
-  box-sizing: border-box;
+.input-box input:focus-visible {
+    outline: 1px solid #6c63ff;
 }
 
-#botao:hover {
-  background-color: #ffc9c0;
-  transition: 0.5s;
-  border-radius: 10px;
-  cursor: pointer;
+.input-box label,
+.gender-title h6 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #000000c0;
 }
 
-.teste1 {
-  margin-left: 35%;
-  color: #f6f6ee;
+.input-box input::placeholder {
+    color: #000000be;
+}
+
+.gender-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.62rem;
+    padding: 0 .5rem;
+}
+
+.gender-input {
+    display: flex;
+    align-items: center;
+}
+
+.gender-input input {
+    margin-right: 0.35rem;
+}
+
+.gender-input label {
+    font-size: 0.81rem;
+    font-weight: 600;
+    color: #000000c0;
+}
+
+.continue-button button {
+    width: 100%;
+    margin-top: 2.5rem;
+    border: none;
+    background-color: #6c63ff;
+    padding: 0.62rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.continue-button button:hover {
+    background-color: #6b63fff1;
+}
+
+.continue-button button a {
+    text-decoration: none;
+    font-size: 0.93rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+@media screen and (max-width: 1330px) {
+    .form-image {
+        display: none;
+    }
+
+    .container {
+        width: 50%;
+    }
+
+    .form {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1064px) {
+    .container {
+        width: 90%;
+        height: auto;
+    }
+
+    .input-group {
+        flex-direction: column;
+        z-index: 5;
+        padding-right: 5rem;
+        max-height: 10rem;
+        overflow-y: scroll;
+        flex-wrap: nowrap;
+    }
+
+    .gender-inputs {
+        margin-top: 2rem;
+    }
+
+    .gender-group {
+        flex-direction: column;
+    }
+
+    .gender-title h6 {
+        margin: 0;
+    }
+
+    .gender-input {
+        margin-top: 0.5rem;
+    }
 }
 
 @media print {
-  body {
-    margin: 0;
-    border: 0;
-    padding: 0;
-    background-color: #f6f6ee;
-    font-family: "Poppins", sans-serif;
-  }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-  form,
-  #botao {
-    display: none;
-  }
+    .form-image {
+        display: none;
+    }
 
-  #header nav {
-    display: none;
-  }
+    .form {
+        width: 100%;
+    }
 
-  #logo {
-    display: block;
-    margin-left: 70%;
-    margin-top: 100px;
-    height: 300px;
-  }
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+    }
 
-  .teste1 {
-    width: 80%;
-    margin-top: 150px;
-    margin-left: 10%;
-    margin-bottom: 200px;
-  }
+    .input-group {
+        display: flex;
+        flex-direction: column;
+    }
 
-  #nomePrint,
-  #sobrenomePrint,
-  #nascimentoPrint,
-  #profissaoPrint,
-  #cpfPrint,
-  #cepPrint,
-  #senhaPrint,
-  #confirmacaoPrint {
-    color: rgb(124, 0, 0);
-    margin-bottom: 15px;
-  }
-}
+    #continueButton {
+        display: none;
+    }
 
-/* ---------------------- página SOBRE ----------------------------- */
-#qmSomos {
-  font-family: "Poppins";
-  font-size: clamp(1.5rem, -2.875rem + 17.5vw, 5rem);
-  margin-top: 12%;
-  margin-left: 10%;
-}
+    .input-box input {
+        box-shadow: none;
+        border-bottom: 1px solid #6c63ff;
+    }
 
-p {
-  font-size: clamp(0.8rem, 0.55rem + 1vw, 1rem);
-  max-width: 35%;
-  margin-top: 1%;
-  margin-left: 10%;
-}
+    .input-box label,
+    .gender-title h6 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #000000c0;
+    }
 
-@media (max-width: 800px) {
-  #imgSobre {
-    display: none;
-  }
-}
-
-@media screen {
-  #imgSobre {
-    margin-left: 60em;
-    margin-top: -20em;
-  }
+    .input-box input {
+        font-size: 1rem;
+    }
 }
