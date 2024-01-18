@@ -1,79 +1,178 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Formulário para impressão</title>
-  </head>
-  <body>
-    <main>
-        <header id="header">
-          <a href=""><img id="logo" src="imagens/imgLogo.png" alt=""></a>
-          <nav id="nav">
-            <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">Menu
-              <span id="hamburger"></span>
-            </button>
-            <ul id="menu" role="menu">
-              <li><a href="sobre.html">Sobre</a></li>
-              <li><a href="index.html">Formulário</a></li>
-            </ul>
-          </nav>
-        </header>
-      <div id="teste">
-        <form action="">
-          <label for="nome">Nome:</label>
-          <br>
-          <input id="nome" />
-          <br />
-          <label for="sobrenome">Sobrenome:</label>
-          <br>
-          <input id="sobrenome" />
-          <br />
-          <label for="nascimento">Nascimento:</label>
-          <br>
-          <input id="nascimento" />
-          <br />
-          <label for="profissao">Profissão:</label>
-          <br>
-          <input id="profissao" />
-          <br />
-          <label for="cpf">CPF:</label>
-          <br>
-          <input id="cpf" />
-          <br />
-          <label for="cep">CEP:</label>
-          <br>
-          <input id="cep" />
-          <br />
-          <label for="senha">Senha:</label>
-          <br>
-          <input type="password" id="senha" required/>
-          <br />
-          <label for="confirmacao">Confirmação:</label>
-          <br>
-          <input type="password" id="confirmacao" required/>
-        </div>
-      </form>
+    <title>Impressão de formulário</title>
+</head>
 
-        <div id="divButton">
-          <button id="botao" onclick="guardaForm()">Envia</button>
+<body>
+    <div class="container">
+        <div class="form-image">
+            <img class="animated" id="imgForm" src="img/group-therapy-animate.svg" alt="">
         </div>
+        <div class="form">
+            <form action="#" id="formulario">
+                <div class="form-header">
+                    <div class="title">
+                        <h1 id="formTitle">Cadastre-se</h1>
+                    </div>
+                </div>
 
-        <div class="teste1">
-      <div id="nomePrint"></div>
-      <div id="sobrenomePrint"></div>
-      <div id="nascimentoPrint"></div>
-      <div id="profissaoPrint"></div>
-      <div id="cpfPrint"></div>
-      <div id="cepPrint"></div>
-      <div id="senhaPrint"></div>
-      <div id="confirmacaoPrint"></div>
+                <div class="input-group">
+                    <div class="input-box">
+                        <label for="primeiroNome">Primeiro Nome</label>
+                        <input id="primeiroNome" type="text" name="primeiroNome" placeholder="" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="sobrenome">Sobrenome</label>
+                        <input id="sobrenome" type="text" name="sobrenome" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="email">E-mail</label>
+                        <input id="email" type="email" name="email" placeholder="" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="telefone">Celular</label>
+                        <input id="telefone" name="telefone" type="tel" maxlength="15" onkeyup="handlePhone(event)"
+                            required>
+                    </div>
+
+                    <div class="input-box" id="passwordBox">
+                        <label for="senha">Senha</label>
+                        <input id="senha" type="password" name="senha" placeholder="" required>
+                    </div>
+
+                    <div class="input-box" id="confirmPasswordBox">
+                        <label for="confirmacaoSenha">Confirme sua Senha</label>
+                        <input id="confirmacaoSenha" type="password" name="confirmacaoSenha" placeholder="" required>
+                    </div>
+                </div>
+
+                <div class="gender-inputs" id="genderInputs">
+                    <div class="gender-title">
+                        <h6>Gênero</h6>
+                    </div>
+
+                    <div class="gender-group">
+                        <div class="gender-input">
+                            <input id="feminino" type="radio" name="genero">
+                            <label for="feminino">Feminino</label>
+                        </div>
+
+                        <div class="gender-input">
+                            <input id="masculino" type="radio" name="genero">
+                            <label for="masculino">Masculino</label>
+                        </div>
+
+                        <div class="gender-input">
+                            <input id="outros" type="radio" name="genero">
+                            <label for="outros">Outros</label>
+                        </div>
+
+                        <div class="gender-input">
+                            <input id="naoInformado" type="radio" name="genero">
+                            <label for="naoInformado">Prefiro não dizer</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="continue-button">
+                    <button type="button" id="continueButton" disabled>Continuar</button>
+                </div>
+            </form>
+        </div>
     </div>
-      <script src="javascript/script.js"></script>
 
-   
-    </main>
-  </body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("formulario");
+            const continueButton = document.getElementById("continueButton");
+            const formTitle = document.getElementById("formTitle");
+            const genderInputs = document.getElementById("genderInputs");
+            const confirmPasswordBox = document.getElementById("confirmPasswordBox");
+
+            form.addEventListener("input", function () {
+                const passwordInput = document.getElementById("senha");
+                const confirmPasswordInput = document.getElementById("confirmacaoSenha");
+
+                const hasEmptyRequiredFields = Array.from(form.elements).some(
+                    (element) => element.required && (
+                        (element.type !== "radio" && element.value.trim() === "") ||
+                        (element.type === "radio" && !form.querySelector(`input[name="${element.name}"]:checked`))
+                    )
+                );
+
+                const passwordsMatch = passwordInput.value === confirmPasswordInput.value;
+                const isGenderSelected = form.querySelector('input[name="genero"]:checked');
+
+                continueButton.disabled = hasEmptyRequiredFields || !isGenderSelected || !passwordsMatch;
+            });
+
+            continueButton.addEventListener("click", function () {
+                const passwordInput = document.getElementById("senha");
+                const confirmPasswordInput = document.getElementById("confirmacaoSenha");
+
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    return;
+                }
+
+                if (!continueButton.disabled) {
+                    window.print();
+                }
+            });
+
+            window.addEventListener("beforeprint", function () {
+                formTitle.innerText = "Formulário para impressão";
+
+                const selectedGender = form.querySelector('input[name="genero"]:checked');
+
+                if (selectedGender) {
+                    const genderContainer = document.createElement("div");
+                    genderContainer.classList.add("gender-info");
+                    genderContainer.innerHTML = "<label style='font-size: 1.3rem; font-weight: 600; color: #000000c0;'>Gênero: " + selectedGender.nextElementSibling.textContent + "</label>";
+                    form.appendChild(genderContainer);
+                }
+
+                genderInputs.style.display = "none";
+                confirmPasswordBox.style.display = "none";
+
+                const passwordInput = document.getElementById("senha");
+                passwordInput.type = "text";
+            });
+
+            window.addEventListener("afterprint", function () {
+                formTitle.innerText = "Cadastre-se";
+
+                const genderContainer = form.querySelector('.gender-info');
+                if (genderContainer) {
+                    genderContainer.remove();
+                }
+
+                genderInputs.style.display = "block";
+                confirmPasswordBox.style.display = "flex";
+
+                const passwordInput = document.getElementById("senha");
+                passwordInput.type = "password";
+            });
+        });
+
+        const handlePhone = (event) => {
+            let input = event.target
+            input.value = phoneMask(input.value)
+        }
+
+        const phoneMask = (value) => {
+            if (!value) return ""
+            value = value.replace(/\D/g, '')
+            value = value.replace(/(\d{2})(\d)/, "($1) $2")
+            value = value.replace(/(\d)(\d{4})$/, "$1-$2")
+            return value
+        }
+    </script>
+</body>
 </html>
