@@ -1,51 +1,88 @@
- //função pro BUTTON
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("formulario");
+    const continueButton = document.getElementById("continueButton");
+    const formTitle = document.getElementById("formTitle");
+    const genderInputs = document.getElementById("genderInputs");
+    const titleContainer = document.getElementById("titleContainer");
 
- function guardaForm() {
-    var formsClientes = new Object();
+    form.addEventListener("input", function () {
+        const passwordInput = document.getElementById("senha");
+        const confirmPasswordInput = document.getElementById("confirmacaoSenha");
 
-    formsClientes.nome = document.getElementById("nome").value;
-    formsClientes.sobrenome = document.getElementById("sobrenome").value;
-    formsClientes.nascimento = document.getElementById("nascimento").value;
-    formsClientes.profissao = document.getElementById("profissao").value;
-    formsClientes.cpf = document.getElementById("cpf").value;
-    formsClientes.cep = document.getElementById("cep").value;
-    formsClientes.senha = document.getElementById("senha").value;
-    formsClientes.confirmacao = document.getElementById("confirmacao").value;
+        const hasEmptyRequiredFields = Array.from(form.elements).some(
+            (element) => element.required && (
+                (element.type !== "radio" && element.value.trim() === "") ||
+                (element.type === "radio" && !form.querySelector(`input[name="${element.name}"]:checked`))
+            )
+        );
 
-    //converte para string JSON
-     var formParaJson = JSON.stringify(formsClientes);
+        const passwordsMatch = passwordInput.value === confirmPasswordInput.value;
+        const isGenderSelected = form.querySelector('input[name="genero"]:checked');
 
-    document.getElementById("nomePrint").innerHTML = 'Nome: ' + formsClientes.nome;
-    document.getElementById("sobrenomePrint").innerHTML = 'Sobrenome: ' + formsClientes.sobrenome;
-    document.getElementById("nascimentoPrint").innerHTML = 'Nascimento: ' + formsClientes.nascimento;
-    document.getElementById("profissaoPrint").innerHTML = 'Profissão: ' + formsClientes.profissao;
-    document.getElementById("cpfPrint").innerHTML = 'CPF: ' + formsClientes.cpf;
-    document.getElementById("cepPrint").innerHTML = 'CEP: ' + formsClientes.cep;
-    document.getElementById("senhaPrint").innerHTML = 'Senha: ' + formsClientes.senha;
-    document.getElementById("confirmacaoPrint").innerHTML = 'Confirmação da senha: ' + formsClientes.confirmacao;
-   
-    window.print()
-    console.log(formsClientes.valueOf())
+        continueButton.disabled = hasEmptyRequiredFields || !isGenderSelected || !passwordsMatch;
+    });
 
- }
+    continueButton.addEventListener("click", function () {
+        const passwordInput = document.getElementById("senha");
+        const confirmPasswordInput = document.getElementById("confirmacaoSenha");
 
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            return;
+        }
 
-//  para menu
+        if (!continueButton.disabled) {
+            window.print();
+        }
+    });
 
-const btnMobile = document.getElementById('btn-mobile');
+    window.addEventListener("beforeprint", function () {
+        formTitle.innerText = "Formulário para impressão";
 
-function toggleMenu(event) {
-  if (event.type === 'touchstart') event.preventDefault();
-  const nav = document.getElementById('nav');
-  nav.classList.toggle('active');
-  const active = nav.classList.contains('active');
-  event.currentTarget.setAttribute('aria-expanded', active);
-  if (active) {
-    event.currentTarget.setAttribute('aria-label', 'Fechar Menu');
-  } else {
-    event.currentTarget.setAttribute('aria-label', 'Abrir Menu');
-  }
-}
+        const selectedGender = form.querySelector('input[name="genero"]:checked');
 
-btnMobile.addEventListener('click', toggleMenu);
-btnMobile.addEventListener('touchstart', toggleMenu);
+        if (selectedGender) {
+            const genderContainer = document.createElement("div");
+            genderContainer.classList.add("gender-info");
+            genderContainer.innerHTML = "<label style='font-size: 1.3rem; font-weight: 600; color: #000000c0;'>Gênero: " + selectedGender.nextElementSibling.textContent + "</label>";
+            form.appendChild(genderContainer);
+        }
+
+        genderInputs.style.display = "none";
+
+        const confirmPasswordBox = document.getElementById("confirmPasswordBox");
+        confirmPasswordBox.style.display = "none";
+
+        const passwordInput = document.getElementById("senha");
+        passwordInput.type = "text";
+    });
+
+    window.addEventListener("afterprint", function () {
+        formTitle.innerText = "Cadastre-se";
+
+        const genderContainer = form.querySelector('.gender-info');
+        if (genderContainer) {
+            genderContainer.remove();
+        }
+
+        genderInputs.style.display = "block";
+
+        const confirmPasswordBox = document.getElementById("confirmPasswordBox");
+        confirmPasswordBox.style.display = "flex";
+
+        const passwordInput = document.getElementById("senha");
+        passwordInput.type = "password";
+    });
+});
+
+const handlePhone = (event) => {
+    let input = event.target;
+    input.value = phoneMask(input.value);
+};
+
+const phoneMask = (value) => {
+    if (!value) return "";
+    value = value.replace(/\D/g, '');
+    value = value.replace(/(\d{2})(\d)/, "($1) $2");
+    value = value.replace(/(\d)(\d{4})$/, "$1-$2");
+    return value;
+};
